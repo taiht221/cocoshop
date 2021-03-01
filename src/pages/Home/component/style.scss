@@ -1,0 +1,80 @@
+.fashion__card {
+  .image {
+    a {
+      overflow: hidden;
+      max-height: 300px;
+      height: 250px;
+      img {
+        object-fit: unset;
+        border-radius: 1rem;
+      }
+    }
+    .percent {
+      background-color: red;
+      color: white;
+    }
+  }
+  .text {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      -webkit-box-orient: vertical;
+    }
+    .price {
+      color: grey;
+      text-transform: none;
+      text-decoration: line-through;
+      margin-right: 10px;
+    }
+    .price,
+    .sale {
+      font-size: 14px;
+    }
+    &__price {
+      display: flex;
+    }
+  }
+}
+.dashed-loading {
+  position: relative;
+  height: 80vh;
+}
+.dashed-loading:after,
+.dashed-loading:before {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  left: 45%;
+}
+.dashed-loading:before {
+  z-index: 5;
+  border: 3px dashed green;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s linear infinite;
+  animation: dashed 1s linear infinite;
+}
+.dashed-loading:after {
+  z-index: 10;
+  border: 3px solid green;
+  border-left: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-animation: dashed 1s ease infinite;
+  animation: dashed 1s ease infinite;
+}
+@keyframes dashed {
+  to {
+    transform: rotate(360deg);
+  }
+}
