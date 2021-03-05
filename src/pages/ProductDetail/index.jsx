@@ -1,4 +1,5 @@
-import Breadcrumbs from '../../components/Breadcrumbs';
+import Breadcrumbs from 'components/Breadcrumbs/Breadcrumbs';
+
 export default function ProductDetail() {
   return (
     <>

@@ -1,111 +1,76 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useRouteMatch } from 'react-router-dom';
-import Brands from '../../components/Brands';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import CategoryName from '../../components/CategoryName';
-import FilterChoose from '../../components/FilterChoose';
-import Pagination from '../../components/Pagination';
-import Price from '../../components/Price';
-import Rating from '../../components/Rating';
-import RowFilter from '../../components/RowFilter';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import CategoryName from '../../components/CategoryName/CategoryName';
+import FilterChoose from '../../components/FilterChoose/FilterChoose';
+import Pagination from '../../components/Pagination/Pagination';
+import Price from '../../components/Price/Price';
+import Rating from '../../components/Rating/Rating';
+import RowFilter from '../../components/RowFilter/RowFilter';
 import { getProduct } from '../../redux/actions/productAction';
-import CategoryCard from './component/CategoryCard';
-import CategoryGCard from './component/CategoryGCard';
-import LoadingCard from './component/LoadingCard';
 import queryString from 'query-string';
+import Brands from 'components/Brands/Brands';
+import CategoryTitle from 'components/CategoryTitle/CategoryTitle';
+import './style.scss';
+import useChangeTitle from 'hooks/useChangeTitle';
+import useGetTitle from 'hooks/useGetTitle';
+import ProductsLoading from './component/CategoryLoading/ProductsLoading';
+import CategoryList from './component/ListView/CategoryList';
+import CategoryGrid from './component/GridView/CategoryGrid';
+import LoadingCard from './component/CategoryLoading/LoadingCard';
 
-export default function CategoryGrid() {
-  const parsed = queryString.parse(useLocation().search);
-  let [layout, setLayout] = useState('list');
-  // let [data, setData] = useState(null);
-  // let [products, setProducts] = useState(null);
-
+export default function Category() {
   const dispatch = useDispatch();
-
+  const parsed = queryString.parse(useLocation().search);
+  const [layout, setLayout] = useState('grid');
   const Products = useSelector((state) => state.product.Productdata);
-  // console.log("abc", Products.paginate);
-  let routerMatch = useRouteMatch();
-  // let param = useParams();
-  // console.log(param);
+  const routerMatch = useRouteMatch();
   const Categories = useSelector((state) => state.category.categoryData);
-  // console.log(Categories);
-
-  // console.log("cate", Categories);
-
-  // console.log("route", routerMatch);
-  // console.log('route2',routerMatch.params.slug.substr(routerMatch.params.slug.lastIndexOf('id')+2));
-  // console.log('route3',routerMatch.params.slug.indexOf('id'));
+  const [loading, setLoading] = useState(false);
+  const categoryName = useGetTitle(Categories);
+  const documentTitle = useChangeTitle(categoryName);
+  const slug = routerMatch.params.slug;
+  console.log(Products.data, loading);
 
   useEffect(() => {
     dispatch(
       getProduct({
-        id: routerMatch.params.slug?.substr(routerMatch.params.slug?.lastIndexOf('id') + 2),
+        id: slug?.substr(slug?.lastIndexOf('id') + 2),
         pageQueryParam: parsed.page,
         sortQueryParam: parsed.sort,
       })
     );
+
+    return documentTitle === undefined ? null : documentTitle, setLoading(false);
   }, [routerMatch]);
+  useEffect(() => {
+    if (!Products.data && Categories.data === undefined) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [Products.data]);
 
-  let cateName = 'Danh sách sản phẩm';
-
-  if (routerMatch.params.slug === undefined) {
-    cateName = cateName;
-  } else {
-    cateName = Categories.find(
-      (e) => e.id === parseInt(routerMatch.params.slug.substr(routerMatch.params.slug.lastIndexOf('id') + 2))
-    );
-    cateName = cateName?.title;
-  }
-
-  // usePagination(Products.paginate,4)
-  // console.log("aaaa",usePagination(Products.paginate,4))
-  if (!Products || !Categories) {
-    return <LoadingCard />;
-  }
-
-  return (
+  const setLayoutList = () => {
+    setLayout('list');
+  };
+  const setLayoutGrid = () => {
+    setLayout('grid');
+  };
+  return loading ? (
+    <LoadingCard />
+  ) : (
     <>
-      <Breadcrumbs links={[{ title: 'Trang chủ', link: '/' }, { title: cateName }]} />
-      <main className={layout == 'list' ? 'category-list' : 'category-grid'}>
+      <Breadcrumbs links={[{ title: 'Trang chủ', link: '/' }, { title: categoryName }]} />
+      <main className={layout === 'list' ? 'category-page category-list' : 'category-page category-grid'}>
         <div className="container">
-          <div className="row category-list--title">
-            <div>
-              {/* {Categories?.map((e,i) =>
-                e? (
-                  <h2 key={i}>{e.title}</h2>
-                ) : (
-                  <h2>Danh sách sản phẩm</h2>
-                )
-              )} */}
-              <h2>{cateName}</h2>
-            </div>
-            <div className="view">
-              <div
-                onClick={() => {
-                  setLayout('grid');
-                }}
-              >
-                <i>
-                  <img src="/assets/img/layer.svg" alt="" />
-                </i>
-                Lưới
-              </div>
-              <div
-                onClick={() => {
-                  setLayout('list');
-                }}
-              >
-                <i>
-                  <img src="/assets/img/layer2.svg" alt="" />
-                </i>
-                Danh sách
-              </div>
-              <span>
-                <i>{Products.paginate?.count}</i> Sản phẩm
-              </span>
-            </div>
-          </div>
+          <CategoryTitle
+            cateName={categoryName}
+            setLayoutList={setLayoutList}
+            setLayoutGrid={setLayoutGrid}
+            productCount={Products.paginate?.count}
+          />
           <RowFilter />
           <FilterChoose />
           <div className="row category__wrap">
@@ -125,15 +90,15 @@ export default function CategoryGrid() {
             </div>
             <div className="col-lg-9 category__right">
               {Products.data?.map((e, i) =>
-                layout == 'grid' ? <CategoryGCard {...e} key={i} /> : <CategoryCard {...e} key={i} />
+                layout === 'grid' ? <CategoryGrid {...e} key={i} /> : <CategoryList {...e} key={i} />
               )}
               <Pagination
                 paginate={Products.paginate}
                 renderLink={(e) => {
-                  if (routerMatch.params.slug === undefined) {
+                  if (slug === undefined) {
                     return '/the-loai' + `?page=${e}`;
                   } else {
-                    return `/the-loai/${routerMatch.params.slug}` + `?page=${e}`;
+                    return `/the-loai/${slug}` + `?page=${e}`;
                   }
                 }}
               />

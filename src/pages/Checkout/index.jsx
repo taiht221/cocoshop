@@ -1,5 +1,5 @@
+import Breadcrumbs from 'components/Breadcrumbs/Breadcrumbs';
 import { Link } from 'react-router-dom';
-import Breadcrumbs from '../../components/Breadcrumbs';
 export default function Checkout() {
   return (
     <>
