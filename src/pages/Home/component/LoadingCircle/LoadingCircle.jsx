@@ -5,8 +5,13 @@ LoadingCricle.propTypes = {};
 
 function LoadingCricle() {
   return (
-    <div className="container">
-      <div className="dashed-loading"></div>
+    <div className="loading-screen">
+      <div className="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   );
 }

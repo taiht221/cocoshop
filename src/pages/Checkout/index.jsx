@@ -194,9 +194,9 @@ export default function Checkout() {
                     <span className="checkmark" />
                   </label>
                 </div>
-                <a href="#" className="btn-submit">
+                <Link to="/" className="btn-submit">
                   Complete order
-                </a>
+                </Link>
                 <div className="safe">
                   <i>
                     <img src="/assets/img/shield.svg" alt="" />

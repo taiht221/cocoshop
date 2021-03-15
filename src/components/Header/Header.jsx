@@ -1,40 +1,67 @@
+import { IconButton, LinearProgress, Menu, MenuItem } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import { makeStyles } from '@material-ui/core/styles';
+import { AccountCircle, Close } from '@material-ui/icons';
+import Login from 'pages/Auths/components/Login';
+import Register from 'pages/Auths/components/Register';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { openCart } from '../../redux/actions/cartAction';
 import { getCategory } from '../../redux/actions/categoryAction';
 import './style.scss';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Register from 'pages/Auths/Register';
-import { IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
-import Login from 'pages/Auths/Login';
 export default function Header() {
   let cart = useSelector((store) => store.cart);
-  let categorytitle = useSelector((store) => store.category.categoryData);
+  let categorytitle = useSelector((store) => store.category);
+  let checkuser = useSelector((store) => store.user.current);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('user') === null) {
+      setisLoggedIn(false);
+    } else {
+      setisLoggedIn(true);
+    }
+  }, [checkuser]);
+
   const [form, setForm] = useState('login');
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getCategory());
   }, []);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
     },
     button: {
       fontSize: 'inherit',
+      color: '#3f51b5',
+      fontWeight: 'bold',
     },
     closeButton: {
       position: 'absolute',
       top: theme.spacing(1),
       right: theme.spacing(1),
       color: theme.palette.grey[500],
+      zIndex: 10,
+    },
+    loadingLine: {
+      position: 'absolute',
+      bottom: theme.spacing(-2),
+      left: theme.spacing(0),
+      width: '100%',
     },
   }));
   const [open, setOpen] = useState(false);
@@ -61,31 +88,52 @@ export default function Header() {
         <div className="row">
           <div className="header__top ">
             <div className="header__top--left ">
-              <span>Chat with us</span>
-              <span>+420 336 775 664</span>
-              <span>info@freshnesecom.com</span>
+              <span>Liên lạc với tôi</span>
+              <span>0969045051</span>
+              <span>taiht221@gmail.com</span>
             </div>
             <div className="header__top--right">
-              <Button
-                color="inherit"
-                className={classes.button}
-                onClick={() => {
-                  setForm('login');
-                  handleClickOpen();
-                }}
-              >
-                Đăng nhập
-              </Button>
-              <Button
-                color="inherit"
-                className={classes.button}
-                onClick={() => {
-                  setForm('register');
-                  handleClickOpen();
-                }}
-              >
-                Đăng ký
-              </Button>
+              {!isLoggedIn ? (
+                <>
+                  <Button
+                    color="inherit"
+                    className={classes.button}
+                    onClick={() => {
+                      setForm('login');
+                      handleClickOpen();
+                    }}
+                  >
+                    Đăng nhập
+                  </Button>
+                  <Button
+                    color="inherit"
+                    className={classes.button}
+                    onClick={() => {
+                      setForm('register');
+                      handleClickOpen();
+                    }}
+                  >
+                    Đăng ký
+                  </Button>
+                </>
+              ) : (
+                <div onClick={handleClick}>
+                  <Button color="inherit" className={classes.button}>
+                    {checkuser.name}
+                  </Button>
+                  <IconButton
+                    color="primary"
+
+                    // onClick={
+                    //   // localStorage.clear();
+                    //   // setisLoggedIn(false);
+                    //   handleClick;
+                    // }
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -104,9 +152,11 @@ export default function Header() {
                 <i className="demo-icon icon-search" />
               </button>
             </div>
+            {categorytitle.loading ? <LinearProgress className={classes.loadingLine} /> : null}
+
             <nav className="nav">
               <ul className="cate-top">
-                {categorytitle
+                {categorytitle.categoryData
                   .map((e, i) => (
                     <li key={i}>
                       <Link to={`/the-loai/${e.slug}`}>{e.title}</Link>
@@ -125,6 +175,18 @@ export default function Header() {
         </div>
         <div className="row"></div>
       </div>
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleCloseMenu}>
+        <MenuItem onClick={handleCloseMenu}>Thông tin người dùng</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleCloseMenu();
+            localStorage.clear();
+            setisLoggedIn(false);
+          }}
+        >
+          Đăng xuất
+        </MenuItem>
+      </Menu>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -135,7 +197,9 @@ export default function Header() {
         <IconButton className={classes.closeButton} onClick={handleClose}>
           <Close />
         </IconButton>
-        <DialogContent>{form === 'login' ? <Login /> : <Register />}</DialogContent>
+        <DialogContent>
+          {form === 'login' ? <Login closeDialog={handleClose} /> : <Register closeDialog={handleClose} />}
+        </DialogContent>
       </Dialog>
     </header>
   );

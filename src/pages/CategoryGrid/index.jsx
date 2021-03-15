@@ -18,7 +18,7 @@ import useGetTitle from 'hooks/useGetTitle';
 import ProductsLoading from './component/CategoryLoading/ProductsLoading';
 import CategoryList from './component/ListView/CategoryList';
 import CategoryGrid from './component/GridView/CategoryGrid';
-import LoadingCard from './component/CategoryLoading/LoadingCard';
+import CategoryLoading from './component/CategoryLoading/CategoryLoading';
 
 export default function Category() {
   const dispatch = useDispatch();
@@ -26,12 +26,11 @@ export default function Category() {
   const [layout, setLayout] = useState('grid');
   const Products = useSelector((state) => state.product.Productdata);
   const routerMatch = useRouteMatch();
-  const Categories = useSelector((state) => state.category.categoryData);
-  const [loading, setLoading] = useState(false);
-  const categoryName = useGetTitle(Categories);
+  const Categories = useSelector((state) => state.category);
+  const loading = useSelector((state) => state.product.loading);
+  const categoryName = useGetTitle(Categories.categoryData);
   const documentTitle = useChangeTitle(categoryName);
   const slug = routerMatch.params.slug;
-  console.log(Products.data, loading);
 
   useEffect(() => {
     dispatch(
@@ -42,15 +41,8 @@ export default function Category() {
       })
     );
 
-    return documentTitle === undefined ? null : documentTitle, setLoading(false);
+    return documentTitle === undefined ? '' : documentTitle;
   }, [routerMatch]);
-  useEffect(() => {
-    if (!Products.data && Categories.data === undefined) {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  }, [Products.data]);
 
   const setLayoutList = () => {
     setLayout('list');
@@ -58,9 +50,7 @@ export default function Category() {
   const setLayoutGrid = () => {
     setLayout('grid');
   };
-  return loading ? (
-    <LoadingCard />
-  ) : (
+  return (
     <>
       <Breadcrumbs links={[{ title: 'Trang chủ', link: '/' }, { title: categoryName }]} />
       <main className={layout === 'list' ? 'category-page category-list' : 'category-page category-grid'}>
@@ -74,35 +64,43 @@ export default function Category() {
           <RowFilter />
           <FilterChoose />
           <div className="row category__wrap">
-            <div className="col-lg-3 category__left">
-              <CategoryName data={Categories} />
-              <Brands />
-              <Rating />
-              <Price />
-              <div className="btn-filter">
-                <div className="main-btn">
-                  <span>Apply</span>
-                </div>
-                <div className="reset-btn">
-                  <span>Reset</span>
+            {Categories.loading ? (
+              <CategoryLoading />
+            ) : (
+              <div className="col-lg-3 category__left">
+                <CategoryName data={Categories.categoryData} />
+                <Brands />
+                <Rating />
+                <Price />
+                <div className="btn-filter">
+                  <div className="main-btn">
+                    <span>Apply</span>
+                  </div>
+                  <div className="reset-btn">
+                    <span>Reset</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-9 category__right">
-              {Products.data?.map((e, i) =>
-                layout === 'grid' ? <CategoryGrid {...e} key={i} /> : <CategoryList {...e} key={i} />
-              )}
-              <Pagination
-                paginate={Products.paginate}
-                renderLink={(e) => {
-                  if (slug === undefined) {
-                    return '/the-loai' + `?page=${e}`;
-                  } else {
-                    return `/the-loai/${slug}` + `?page=${e}`;
-                  }
-                }}
-              />
-            </div>
+            )}
+            {loading ? (
+              <ProductsLoading />
+            ) : (
+              <div className="col-lg-9 category__right">
+                {Products.data?.map((e, i) =>
+                  layout === 'grid' ? <CategoryGrid {...e} key={i} /> : <CategoryList {...e} key={i} />
+                )}
+                <Pagination
+                  paginate={Products.paginate}
+                  renderLink={(e) => {
+                    if (slug === undefined) {
+                      return '/the-loai' + `?page=${e}`;
+                    } else {
+                      return `/the-loai/${slug}` + `?page=${e}`;
+                    }
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </main>

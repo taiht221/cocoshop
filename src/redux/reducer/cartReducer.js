@@ -1,10 +1,8 @@
-import { CART_CLOSE, CART_ITEM_REMOVE, CART_OPEN } from "../actions/type";
+import { CART_CLOSE, CART_ITEM_REMOVE, CART_OPEN } from '../actions/type';
 
 const initState = {
   openCart: false,
-  list: [
-      {}, {}
-  ],
+  list: [{}, {}],
   mount: 0,
 };
 
@@ -24,9 +22,9 @@ export default function cartReducer(state = initState, action) {
       let { list } = state;
       list.splice(action.payload, 1);
       return {
-          ...state,
-          list
-      }
+        ...state,
+        list,
+      };
     default:
       return state;
   }

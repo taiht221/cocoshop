@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import InputField from 'components/form-controls/InputField/Index';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Avatar, Button, FormControl, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Button, LinearProgress, makeStyles, Typography } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
+import InputField from 'components/form-controls/InputField/Index';
 import PasswordField from 'components/form-controls/PasswordField';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2, 0),
   },
+  progress: {
+    position: 'absolute',
+    top: theme.spacing(0.5),
+    left: 0,
+    right: 0,
+  },
 }));
 
 LoginForm.propTypes = {
@@ -30,6 +37,7 @@ LoginForm.propTypes = {
 };
 
 function LoginForm(props) {
+  const loadingUser = useSelector((state) => state.user.loading);
   const classes = useStyles();
   const schema = yup.object().shape({
     email: yup.string().required('Nhập email của bạn').email('Hãy nhập đúng định dạng email').trim(),
@@ -53,6 +61,7 @@ function LoginForm(props) {
   };
   return (
     <div className={classes.root}>
+      {loadingUser && <LinearProgress className={classes.progress} />}
       <Avatar className={classes.avatar}>
         <LockOutlined />
       </Avatar>
@@ -62,7 +71,15 @@ function LoginForm(props) {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField form={form} name="email" label="Email" />
         <PasswordField form={form} name="password" label="Mật Khẩu" />
-        <Button type="submit" variant="contained" color="primary" fullWidth className={classes.submit} size="large">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          className={classes.submit}
+          size="large"
+          disabled={loadingUser}
+        >
           Đăng nhập
         </Button>
       </form>

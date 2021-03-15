@@ -1,4 +1,4 @@
-import { GET_CATEGORY, GET_CATEGORY_SUCCESS } from "../actions/type";
+import { GET_CATEGORY, GET_CATEGORY_SUCCESS } from '../actions/type';
 
 const initState = {
   categoryData: [],
@@ -15,7 +15,6 @@ export default function productReducer(state = initState, action) {
       };
 
     case GET_CATEGORY_SUCCESS:
-      
       return {
         ...state,
         categoryData: action.payload,

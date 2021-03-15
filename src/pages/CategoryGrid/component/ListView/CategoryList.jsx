@@ -44,14 +44,14 @@ export default function CategoryList({
           <div className="card-rating">{start}</div>
           <ul className="detail">
             {specifications[0]?.attributes
-              .map((e) => {
+              .map((e) => (
                 <li>
                   <span>{e.name}</span>
                   <span>
                     <strong>{e.value}</strong>
                   </span>
-                </li>;
-              })
+                </li>
+              ))
               .slice(0, 4)}
             <li>
               <span>Lượt đánh giá</span>

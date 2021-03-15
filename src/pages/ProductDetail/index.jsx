@@ -1,4 +1,5 @@
 import Breadcrumbs from 'components/Breadcrumbs/Breadcrumbs';
+import { Link } from 'react-router-dom';
 
 export default function ProductDetail() {
   return (
@@ -80,10 +81,10 @@ export default function ProductDetail() {
                   <span>Pcs</span>
                 </div>
                 <div className="btn-filter">
-                  <a href="#" className="main-btn">
+                  <Link to="/" className="main-btn">
                     <i>+</i>
                     <span>Add to cart</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="wish-list">
@@ -174,16 +175,16 @@ export default function ProductDetail() {
           <div className="row related-products">
             <div className="text">
               <h3>Related products</h3>
-              <a href="#">
+              <Link to="/">
                 More products <i>&gt;</i>
-              </a>
+              </Link>
             </div>
             <div className="related-products__wrap category__right">
               <div className="category-card ">
                 <div className="card-img ">
-                  <a href="#">
+                  <Link to="/">
                     <img src="/assets/img/bot1.png" alt="" />
-                  </a>
+                  </Link>
                   <span className="percent">- 36 %</span>
                 </div>
                 <div className="card-infor ">
@@ -195,18 +196,18 @@ export default function ProductDetail() {
                     <span className="price">36.99 USD</span>
                     <span className="sale-price">48.56</span>
                     <div className="btn-filter">
-                      <a href="#" className="main-btn">
+                      <Link to="/" className="main-btn">
                         <span>Buy now</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="category-card ">
                 <div className="card-img ">
-                  <a href="#">
+                  <Link to="/">
                     <img src="/assets/img/bot1.png" alt="" />
-                  </a>
+                  </Link>
                   <span className="percent">- 36 %</span>
                 </div>
                 <div className="card-infor ">
@@ -218,18 +219,18 @@ export default function ProductDetail() {
                     <span className="price">36.99 USD</span>
                     <span className="sale-price">48.56</span>
                     <div className="btn-filter">
-                      <a href="#" className="main-btn">
+                      <Link to="/" className="main-btn">
                         <span>Buy now</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="category-card ">
                 <div className="card-img ">
-                  <a href="#">
+                  <Link to="/">
                     <img src="/assets/img/bot1.png" alt="" />
-                  </a>
+                  </Link>
                   <span className="percent">- 36 %</span>
                 </div>
                 <div className="card-infor ">
@@ -241,18 +242,18 @@ export default function ProductDetail() {
                     <span className="price">36.99 USD</span>
                     <span className="sale-price">48.56</span>
                     <div className="btn-filter">
-                      <a href="#" className="main-btn">
+                      <Link to="/" className="main-btn">
                         <span>Buy now</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="category-card ">
                 <div className="card-img ">
-                  <a href="#">
+                  <Link to="/">
                     <img src="/assets/img/bot1.png" alt="" />
-                  </a>
+                  </Link>
                   <span className="percent">- 36 %</span>
                 </div>
                 <div className="card-infor ">
@@ -264,9 +265,9 @@ export default function ProductDetail() {
                     <span className="price">36.99 USD</span>
                     <span className="sale-price">48.56</span>
                     <div className="btn-filter">
-                      <a href="#" className="main-btn">
+                      <Link to="/" className="main-btn">
                         <span>Buy now</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

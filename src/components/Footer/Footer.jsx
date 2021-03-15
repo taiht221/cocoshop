@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './style.scss';
 export default function Footer() {
   return (
@@ -7,9 +8,9 @@ export default function Footer() {
           <div className="footer__wrap">
             <div className="col-lg-6 footer__left">
               <div className="logo">
-                <a href="#">
+                <Link to="/" href="#">
                   <img src="/assets/img/logo.svg" alt="logo" />
-                </a>
+                </Link>
               </div>
               <p>We earned a reputation of being good at what we do.</p>
               <p>Let us take your online shop to new dimension in success!</p>
@@ -21,18 +22,18 @@ export default function Footer() {
                 <span>kawsarahmed0210@gmail.com</span>
                 <span>01647470457</span>
                 <div className="social__icons">
-                  <a href="#">
+                  <Link to="/" href="#">
                     <i className="demo-icon icon-facebook" />
-                  </a>
-                  <a href="#">
+                  </Link>
+                  <Link to="/" href="#">
                     <i className="demo-icon icon-instagram" />
-                  </a>
-                  <a href="#">
+                  </Link>
+                  <Link to="/" href="#">
                     <i className="demo-icon icon-twitter" />
-                  </a>
-                  <a href="#">
+                  </Link>
+                  <Link to="/" href="#">
                     <i className="demo-icon icon-linkedin-squared" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -43,35 +44,61 @@ export default function Footer() {
                   <form>
                     <input type="text" placeholder="Search.." name="search" />
                   </form>
-                  <a href="#">Join</a>
+                  <Link to="/" href="#">
+                    Join
+                  </Link>
                 </div>
               </div>
               <div className="col-lg-4 col-xs-12 align-middle">
-                <a href="#">
+                <Link to="/" href="#">
                   <h3>Shop</h3>
-                </a>
-                <a href="#">Shop</a>
-                <a href="#">Collection</a>
-                <a href="#">Outlet</a>
-                <a href="#">Lookbook</a>
+                </Link>
+                <Link to="/" href="#">
+                  Shop
+                </Link>
+                <Link to="/" href="#">
+                  Collection
+                </Link>
+                <Link to="/" href="#">
+                  Outlet
+                </Link>
+                <Link to="/" href="#">
+                  Lookbook
+                </Link>
               </div>
               <div className="col-lg-4 col-xs-12 align-middle">
-                <a href="#">
+                <Link to="/" href="#">
                   <h3>HELP</h3>
-                </a>
-                <a href="#">FAQ</a>
-                <a href="#">Privecy Policy</a>
-                <a href="#">Tearms and conditions</a>
-                <a href="#">Return and Exchanges</a>
+                </Link>
+                <Link to="/" href="#">
+                  FAQ
+                </Link>
+                <Link to="/" href="#">
+                  Privecy Policy
+                </Link>
+                <Link to="/" href="#">
+                  Tearms and conditions
+                </Link>
+                <Link to="/" href="#">
+                  Return and Exchanges
+                </Link>
               </div>
               <div className="col-lg-4 col-xs-12 align-middle">
-                <a href="#">
+                <Link to="/" href="#">
                   <h3>About</h3>
-                </a>
-                <a href="#">Journal</a>
-                <a href="#">Our Story</a>
-                <a href="#">Contact</a>
-                <a href="#">Store Location</a>
+                </Link>
+                <Link to="/" href="#">
+                  Journal
+                </Link>
+                <Link to="/" href="#">
+                  Our Story
+                </Link>
+                <Link to="/" href="#">
+                  Contact
+                </Link>
+                <Link to="/" href="#">
+                  Store Location
+                </Link>
               </div>
             </div>
           </div>

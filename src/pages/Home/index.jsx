@@ -1,6 +1,5 @@
 import useChangeTitle from 'hooks/useChangeTitle';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import homeProductApi from '../../Apis/homeProductApi';
 import Baner from './component/Banner/Baner';
 import HotProducts from './component/HotProducts/HotProducts';

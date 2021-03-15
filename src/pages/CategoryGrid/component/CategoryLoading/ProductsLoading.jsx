@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.scss';
 export default function ProductsLoading() {
   return (
@@ -18,9 +19,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -39,9 +40,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -60,9 +61,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -81,9 +82,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -102,9 +103,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -123,9 +124,9 @@ export default function ProductsLoading() {
               <span className="price">Loading</span>
               <span className="sale-price">Loading</span>
               <div className="btn-filter">
-                <a href="#" className="main-btn">
+                <Link to="/" href="#" className="main-btn">
                   <span>Loading</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

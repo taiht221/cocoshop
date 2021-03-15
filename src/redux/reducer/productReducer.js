@@ -1,4 +1,4 @@
-import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from "../actions/type";
+import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from '../actions/type';
 
 const initState = {
   Productdata: [],

@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import PropTypes, { number } from 'prop-types';
 
 useRenderStart.propTypes = {
   props: PropTypes.number.isRequired,

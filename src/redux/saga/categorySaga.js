@@ -1,12 +1,17 @@
-import { callCategory } from '../../Apis';
+import { callCategory } from '../../Apis/index';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { GET_CATEGORY, GET_CATEGORY_SUCCESS } from '../actions/type';
+import { GET_CATEGORY, GET_CATEGORY_FAIL, GET_CATEGORY_SUCCESS } from '../actions/type';
 
 function* logicCategory() {
-  const res = yield call(callCategory);
-  if (res) {
-    yield put({ type: GET_CATEGORY_SUCCESS, payload: res.data });
+  try {
+    const res = yield call(callCategory);
+    // console.log('res', res);
+    if (res) {
+      yield put({ type: GET_CATEGORY_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    yield put({ type: GET_CATEGORY_FAIL });
   }
 }
 

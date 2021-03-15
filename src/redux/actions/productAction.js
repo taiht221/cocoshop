@@ -1,5 +1,4 @@
-import React from "react";
-import { GET_PRODUCT } from "./type";
+import { GET_PRODUCT } from './type';
 
 export const getProduct = (data) => {
   return {

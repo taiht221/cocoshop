@@ -1,5 +1,5 @@
+import { callItem } from '../../Apis/index';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { callItem } from '../../Apis';
 
 import { GET_PRODUCT, GET_PRODUCT_SUCCESS } from '../actions/type';
 // import { callItem } from "./../../Apis";
