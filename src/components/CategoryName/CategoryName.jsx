@@ -6,7 +6,7 @@ CategoryName.propTypes = {
 export default function CategoryName({ data }) {
   return (
     <div className="categories">
-      <h2 className="title">Loại sản phẩm </h2>
+      <h2 className="title">Danh mục sản phẩm </h2>
       <ul>
         {data &&
           data.map((e, i) => (

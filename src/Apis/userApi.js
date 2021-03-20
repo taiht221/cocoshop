@@ -2,12 +2,12 @@ import axiosClient from './axiosClient';
 
 const userApi = {
   register(data) {
-    const url = '/register';
+    const url = '/elearning/v4/register';
 
     return axiosClient.post(url, data);
   },
   login(data) {
-    const url = '/login';
+    const url = '/elearning/v4/login';
 
     return axiosClient.post(url, data);
   },

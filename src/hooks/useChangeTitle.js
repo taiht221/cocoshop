@@ -5,7 +5,7 @@ useChangeTitle.propTypes = {
 };
 
 function useChangeTitle(props) {
-  const title = props;
+  const title = props || window.location.hostname;
 
   return (document.title = title);
 }

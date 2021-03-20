@@ -15,7 +15,9 @@ import './style.scss';
 export default function Header() {
   let cart = useSelector((store) => store.cart);
   let categorytitle = useSelector((store) => store.category);
+
   let checkuser = useSelector((store) => store.user.current);
+
   const [isLoggedIn, setisLoggedIn] = useState(false);
   useEffect(() => {
     if (localStorage.getItem('user') === null) {
@@ -140,7 +142,7 @@ export default function Header() {
         <div className="row header__mid">
           <div className="logo ">
             <Link to="/">
-              <img src="/assets/img/logo.svg" alt="logo" />
+              <img src="assets/img/logo.svg" alt="logo" />
             </Link>
           </div>
           <div className="search ">
