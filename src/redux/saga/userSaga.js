@@ -1,19 +1,15 @@
 import userApi from 'Apis/userApi';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { useSnackbar } from 'notistack';
-
+import StorageKeys from 'constants/storage-keys';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
-  REGISTER_USER,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_FAIL,
   LOGIN_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
-  LOADING_USER,
-  LOADING_USER_SUCCESS,
-  LOADING_USER_FAIL,
+  REGISTER_USER,
+  REGISTER_USER_FAIL,
+  REGISTER_USER_SUCCESS,
 } from '../actions/type';
-import StorageKeys from 'constants/storage-keys';
+
 // function* logicUser(query) {
 //   const res = yield call(userApi, query.payload);
 

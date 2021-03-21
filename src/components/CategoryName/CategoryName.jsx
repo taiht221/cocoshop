@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './style.scss';
 CategoryName.propTypes = {
   data: PropTypes.array.isRequired,
 };

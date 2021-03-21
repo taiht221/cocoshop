@@ -4,6 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle, Close } from '@material-ui/icons';
+import StoreIcon from '@material-ui/icons/Store';
 import Login from 'pages/Auths/components/Login';
 import Register from 'pages/Auths/components/Register';
 import React, { useEffect, useState } from 'react';
@@ -11,7 +12,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { openCart } from '../../redux/actions/cartAction';
 import { getCategory } from '../../redux/actions/categoryAction';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import './style.scss';
+
 export default function Header() {
   let cart = useSelector((store) => store.cart);
   let categorytitle = useSelector((store) => store.category);
@@ -49,8 +52,8 @@ export default function Header() {
     },
     button: {
       fontSize: 'inherit',
-      color: '#3f51b5',
       fontWeight: 'bold',
+      color: 'green',
     },
     closeButton: {
       position: 'absolute',
@@ -64,6 +67,16 @@ export default function Header() {
       bottom: theme.spacing(-2),
       left: theme.spacing(0),
       width: '100%',
+    },
+    icon: {
+      display: 'block',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      color: 'green',
+    },
+    basket: {
+      color: 'green',
     },
   }));
   const [open, setOpen] = useState(false);
@@ -124,7 +137,7 @@ export default function Header() {
                     {checkuser.name}
                   </Button>
                   <IconButton
-                    color="primary"
+                    className={classes.basket}
 
                     // onClick={
                     //   // localStorage.clear();
@@ -142,7 +155,7 @@ export default function Header() {
         <div className="row header__mid">
           <div className="logo ">
             <Link to="/">
-              <img src="assets/img/logo.svg" alt="logo" />
+              <StoreIcon className={classes.icon} />
             </Link>
           </div>
           <div className="search ">
@@ -169,8 +182,8 @@ export default function Header() {
             </nav>
           </div>
           <div className="icons ">
-            <button href="#" onClick={() => dispatch(openCart())}>
-              <i className="demo-icon icon-shopping-basket" />
+            <button onClick={() => dispatch(openCart())}>
+              <ShoppingCartIcon className={classes.basket} />
               {cart.list.length > 0 && <span className="number-basket">{cart.list.length}</span>}
             </button>
           </div>

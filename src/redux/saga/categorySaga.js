@@ -11,6 +11,7 @@ function* logicCategory() {
       yield put({ type: GET_CATEGORY_SUCCESS, payload: res.data });
     }
   } catch (error) {
+    alert(error);
     yield put({ type: GET_CATEGORY_FAIL });
   }
 }

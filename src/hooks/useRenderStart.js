@@ -1,21 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import StarHalfIcon from '@material-ui/icons/StarHalf';
+import StarIcon from '@material-ui/icons/Star';
+import { makeStyles } from '@material-ui/core/styles';
 useRenderStart.propTypes = {
   props: PropTypes.number.isRequired,
 };
-
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: '#fdbc15',
+  },
+}));
 function useRenderStart(props) {
+  const classes = useStyles();
   let list = [];
   for (let i = 1; i <= props; i++) {
     // if(props==0.5){
     //   return (<i className="demo-icon icon-star start-wcl " />)
     // }
-    list.push(<i className="demo-icon icon-star " key={Math.random()} />);
+    list.push(<StarIcon className={classes.icon} key={Math.random()} />);
   }
 
   if (props - Math.round(props) !== 0) {
-    list.push(<i className="demo-icon icon-star-half-alt" key={Math.random()}></i>);
+    list.push(<StarHalfIcon className={classes.icon} key={Math.random()}></StarHalfIcon>);
   }
   if (props === 0) {
     list.push(
@@ -23,10 +30,7 @@ function useRenderStart(props) {
         Sản phẩm chưa có đánh giá
       </p>
     );
-  } else if (5 - Math.round(props) >= 1) {
-    list.push(<i className="demo-icon icon-star start-wcl" key={Math.random()} />);
   }
-
   return list;
 }
 

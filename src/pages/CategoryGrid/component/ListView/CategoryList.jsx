@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './style.scss';
 import useRenderStart from 'hooks/useRenderStart';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 CategoryList.propTypes = {
   images: PropTypes.array.isRequired,
   discount_rate: PropTypes.number.isRequired,
@@ -28,14 +30,14 @@ export default function CategoryList({
   specifications,
 }) {
   const start = useRenderStart(rating_average);
-
+  const percent = Math.round(100 - (parseInt(real_price) * 100) / parseInt(price));
   return (
     <div className="category-card ">
       <div className="card-img " style={{ position: 'relative' }}>
         <Link to="/thong-tin-san-pham">
           <img src={images[0].base_url} alt="" />
         </Link>
-        <span className="percent">- {Math.round(100 - (parseInt(real_price) * 100) / parseInt(price))}%</span>
+        {percent > 0 ? <span className="percent">{percent > 0 ? `- ${percent} %` : ''}</span> : ''}
       </div>
       <div className="card-infor ">
         <div className="card-infor__left">
@@ -47,46 +49,23 @@ export default function CategoryList({
               .map((e) => (
                 <li>
                   <span>{e.name}</span>
-                  <span>
-                    <strong>{e.value}</strong>
-                  </span>
                 </li>
               ))
-              .slice(0, 4)}
+              .slice(0, 3)}
             <li>
               <span>Lượt đánh giá</span>
               <span>
                 <strong>{review_count}</strong>
               </span>
             </li>
-            <li>
-              <span>{specifications[0].attributes[0].name}</span>
-              <span>{specifications[0].attributes[0].value}</span>
-            </li>
-            <li>
-              <span>{specifications[0]?.attributes[1]?.name}</span>
-              <span>{specifications[0]?.attributes[1]?.value}</span>
-            </li>
-            <li>
-              <span>{specifications[0]?.attributes[2]?.name}</span>
-              <span>
-                <strong>{specifications[0]?.attributes[2]?.value}</strong>
-              </span>
-            </li>
           </ul>
         </div>
         <div className="card-infor__right">
           <span className="price">
-            {real_price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'vnd',
-            })}
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(real_price)}
           </span>
           <span className="sale-price">
-            {price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'vnd',
-            })}
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
           </span>
           <span className="ship-price">
             <strong>Free Shipping</strong>
@@ -95,13 +74,13 @@ export default function CategoryList({
           <div className="btn-filter">
             <div className="main-btn">
               <Link to="thanh-toan-san-pham">
-                Chi tiết <i className="demo-icon icon-down-dir" />
+                Chi tiết <ArrowDropDownIcon />
               </Link>
             </div>
             <div className="wish-btn">
               <Link to="thanh-toan-san-pham">
                 Giỏ Hàng
-                <i className="demo-icon icon-heart-empty" />
+                <FavoriteIcon color="secondary" />
               </Link>
             </div>
           </div>

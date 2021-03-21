@@ -1,6 +1,22 @@
 import { Link } from 'react-router-dom';
 import './style.scss';
+import { makeStyles } from '@material-ui/core/styles';
+import StoreIcon from '@material-ui/icons/Store';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    color: 'green',
+  },
+}));
 export default function Footer() {
+  const classes = useStyles();
   return (
     <footer className="footer">
       <div className="container">
@@ -9,7 +25,7 @@ export default function Footer() {
             <div className="col-lg-6 footer__left">
               <div className="logo">
                 <Link to="/" href="#">
-                  <img src="/assets/img/logo.svg" alt="logo" />
+                  <StoreIcon className={classes.icon} />
                 </Link>
               </div>
               <p>We earned a reputation of being good at what we do.</p>
@@ -22,17 +38,17 @@ export default function Footer() {
                 <span>kawsarahmed0210@gmail.com</span>
                 <span>01647470457</span>
                 <div className="social__icons">
-                  <Link to="/" href="#">
-                    <i className="demo-icon icon-facebook" />
+                  <Link to="/">
+                    <FacebookIcon />
                   </Link>
-                  <Link to="/" href="#">
-                    <i className="demo-icon icon-instagram" />
+                  <Link to="/">
+                    <InstagramIcon />
                   </Link>
-                  <Link to="/" href="#">
-                    <i className="demo-icon icon-twitter" />
+                  <Link to="/">
+                    <TwitterIcon />
                   </Link>
-                  <Link to="/" href="#">
-                    <i className="demo-icon icon-linkedin-squared" />
+                  <Link to="/">
+                    <LinkedInIcon />
                   </Link>
                 </div>
               </div>

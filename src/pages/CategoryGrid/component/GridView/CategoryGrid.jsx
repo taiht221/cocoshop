@@ -17,13 +17,15 @@ CategoryGrid.propTypes = {
 };
 export default function CategoryGrid({ images, discount, name, short_description, price, real_price, rating_average }) {
   const start = useRenderStart(rating_average);
+  const percent = Math.round(100 - (parseInt(real_price) * 100) / parseInt(price));
+
   return (
     <div className="category-card">
       <div className="card-img ">
         <Link to="/">
           <img src={images[0].base_url} alt="" />
         </Link>
-        <span className="percent">- {Math.round(100 - (parseInt(real_price) * 100) / parseInt(price))}%</span>
+        {percent > 0 ? <span className="percent">{percent > 0 ? `- ${percent} %` : ''}</span> : ''}
       </div>
       <div className="card-infor ">
         <div className="card-infor__left">
@@ -34,16 +36,10 @@ export default function CategoryGrid({ images, discount, name, short_description
         </div>
         <div className="card-infor__right">
           <span className="price">
-            {real_price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'vnd',
-            })}
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(real_price)}
           </span>
           <span className="sale-price">
-            {price.toLocaleString('it-IT', {
-              style: 'currency',
-              currency: 'vnd',
-            })}
+            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
           </span>
           <div className="btn-filter">
             <Link to="/" className="main-btn">

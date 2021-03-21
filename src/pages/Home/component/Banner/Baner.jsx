@@ -8,7 +8,10 @@ function Baner(props) {
     <div className="container-fluid">
       <div className="row">
         <div className="banner ">
-          <img src="/assets/img/baner.jpg" alt="banner" />
+          <img
+            src="https://images.unsplash.com/photo-1533757840475-f82395967580?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            alt="banner"
+          />
           <div className="banner__text">
             <span>Chào mừng các bạn đến với</span>
             <b>cocoshop</b>

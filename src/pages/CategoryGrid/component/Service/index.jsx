@@ -7,58 +7,55 @@ import queryString from 'query-string';
 Service.propTypes = {};
 
 function Service(props) {
-  const match = useRouteMatch();
+  const parsed = queryString.parse(useLocation().search);
+
   const history = useHistory();
-  const location = useLocation();
+  const match = useRouteMatch();
+  // const sort = { free_ship_badge: true, is_best_price_guaranteed: 1, support_p2h_delivery: 1 };
   const [values, setValues] = useState({
     free_ship_badge: false,
     is_best_price_guaranteed: false,
     support_p2h_delivery: false,
   });
 
-  const queryaa = {};
-
-  console.log('asdsf', match.url);
-
-  console.log('afdsadfsfads', location.search);
-
-  // const queryaa = {};
-
-  // for (let i in values) {
-  //   if (values[i] === true) {
-  //     queryaa[i] = values[i];
-
-  //     console.log('dfafd', queryaa);
-  //   }
-  // }
-
   const handleChange = (e) => {
     const { name, checked } = e.target;
-
+    console.log(e.target.check);
     setValues((prevValues) => ({
       ...prevValues,
       [name]: checked,
     }));
-
-    // console.log('dfafd', queryaa);
-
-    // history.push({
-    //   pathname: match.url,
-    //   search: queryString.stringify(queryaa),
-    // });
   };
-
-  for (let i in values) {
-    if (values[i] === true) {
-      queryaa[i] = values[i];
+  const newQuery = (e) => {
+    let query = {};
+    if (e) {
+      for (let i in e) {
+        if (e[i]) {
+          query[i] = e[i];
+        }
+      }
+    } else {
+      query = null;
     }
-  }
+    return query;
+  };
+  useEffect(() => {
+    history.push({
+      pathname: match.url,
+      search: queryString.stringify(newQuery(values)),
+    });
+    // console.log(1, parsed);
+    // console.log(parsed === newQuery(values));
+  }, [values]);
 
-  console.log(queryString.stringify(queryaa));
-
+  // console.log(2, newQuery(values));
+  // console.log(3, typeof parsed);
+  // checkEqual(newQuery(values), parsed);
+  // console.log(checkEqual(newQuery(values), parsed));
+  // console.log(parsed == newQuery(values));
   // const parsed = queryString.parse(useLocation().search);
 
-  const sort = { free_ship_badge: true, is_best_price_guaranteed: 1, support_p2h_delivery: 1 };
+  // const sort = { free_ship_badge: true, is_best_price_guaranteed: 1, support_p2h_delivery: 1 };
   // const [sort, setsort] = useState({ free_ship_badge: true, is_best_price_guaranteed: 1, support_p2h_delivery: 1 });
   // const sort = parsed.sort || 'real_price.1';
 
@@ -67,13 +64,13 @@ function Service(props) {
       <div className="check2">
         <h2 className="title">Dịch vụ</h2>
         {[
-          { value: 'free_ship_badge', lable: 'Miễn Phí Giao Hàng' },
-          { value: 'is_best_price_guaranteed', lable: 'Rẻ Hơn Hoàn Tiền' },
-          { value: 'support_p2h_delivery', lable: 'Giao Hàng Nhanh 2h' },
+          { value: 'free_ship_badge', lable: 'Miễn Phí Giao Hàng', check: parsed.free_ship_badge },
+          { value: 'is_best_price_guaranteed', lable: 'Rẻ Hơn Hoàn Tiền', check: parsed.is_best_price_guaranteed },
+          { value: 'support_p2h_delivery', lable: 'Giao Hàng Nhanh 2h', check: parsed.support_p2h_delivery },
         ].map((service) => (
           <label className="filter-square" onChange={handleChange} key={service.value}>
             <span>{service.lable}</span>
-            <input type="checkbox" checked={values[service]} name={service.value} />
+            <input type="checkbox" checked={service.check} name={service.value} />
             <span className="checkmark" />
           </label>
         ))}

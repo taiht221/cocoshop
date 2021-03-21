@@ -1,4 +1,9 @@
 import PropTypes from 'prop-types';
+import GridOnIcon from '@material-ui/icons/GridOn';
+import ReorderIcon from '@material-ui/icons/Reorder';
+import './style.scss';
+import { makeStyles } from '@material-ui/core/styles';
+
 CategoryTitle.propTypes = {
   cateName: PropTypes.string,
   setLayoutList: PropTypes.func.isRequired,
@@ -9,7 +14,18 @@ CategoryTitle.defaultProps = {
   cateName: 'Danh sách sản phẩm',
   productCount: '???',
 };
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(1),
+    color: 'green',
+  },
+  choose: {
+    cursor: 'pointer',
+  },
+}));
 export default function CategoryTitle({ cateName, setLayoutList, setLayoutGrid, productCount }) {
+  const classes = useStyles();
+
   return (
     <div className="row category-list--title">
       <div>
@@ -17,28 +33,28 @@ export default function CategoryTitle({ cateName, setLayoutList, setLayoutGrid, 
       </div>
       <div className="view">
         <div
+          className="view-list"
           onClick={() => {
             setLayoutList();
           }}
         >
-          <i>
-            <img src="/assets/img/layer.svg" alt="" />
-          </i>
-          Lưới
+          <GridOnIcon className={classes.icon} />
+
+          <span>Lưới</span>
         </div>
         <div
+          className="view-list"
           onClick={() => {
             setLayoutGrid();
           }}
         >
-          <i>
-            <img src="/assets/img/layer2.svg" alt="" />
-          </i>
-          Danh sách
+          <ReorderIcon className={classes.icon} />
+
+          <span>Danh sách</span>
         </div>
-        <span>
-          <i>{productCount}</i> Sản phẩm
-        </span>
+        <div>
+          <i className={classes.icon}>{productCount}</i> <span>Sản phẩm</span>
+        </div>
       </div>
     </div>
   );

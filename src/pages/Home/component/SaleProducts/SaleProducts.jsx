@@ -45,7 +45,15 @@ export default function SaleProducts(data) {
             <Link to="/thong-tin-san-pham">
               <img src={e.images[0].base_url} alt={e.slug} className="swiper-lazy" />
             </Link>
-            <span className="percent">- {Math.round(100 - (parseInt(e.real_price) * 100) / parseInt(e.price))}%</span>
+            {Math.round(100 - (parseInt(e.real_price) * 100) / parseInt(e.price)) > 0 ? (
+              <span className="percent">
+                {Math.round(100 - (parseInt(e.real_price) * 100) / parseInt(e.price)) > 0
+                  ? `- ${Math.round(100 - (parseInt(e.real_price) * 100) / parseInt(e.price))} %`
+                  : ''}
+              </span>
+            ) : (
+              ''
+            )}
           </div>
           <div className="text">
             <Link to="/thong-tin-san-pham">
@@ -53,16 +61,10 @@ export default function SaleProducts(data) {
             </Link>
             <div className="text__price">
               <span className="price">
-                {e.price.toLocaleString('it-IT', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}{' '}
+                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(e.real_price)}
               </span>
               <span className="sale">
-                {e.real_price.toLocaleString('it-IT', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}
+                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(e.price)}
               </span>
             </div>
           </div>

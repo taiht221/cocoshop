@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2, 0),
+    backgroundColor: 'green',
+    color: 'white',
   },
   progress: {
     position: 'absolute',
@@ -74,7 +76,6 @@ function LoginForm(props) {
         <Button
           type="submit"
           variant="contained"
-          color="primary"
           fullWidth
           className={classes.submit}
           size="large"

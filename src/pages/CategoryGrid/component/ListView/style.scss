@@ -17,6 +17,12 @@
     font-weight: bold;
   }
 }
-.wish-btn {
+.wish-btn,
+.main-btn {
   text-align: center;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
