@@ -41,12 +41,12 @@ function Service(props) {
   };
   useEffect(() => {
     history.push({
-      pathname: match.url,
+      pathname: history.location.pathname,
       search: queryString.stringify(newQuery(values)),
     });
     // console.log(1, parsed);
     // console.log(parsed === newQuery(values));
-  }, [values]);
+  }, [history, values]);
 
   // console.log(2, newQuery(values));
   // console.log(3, typeof parsed);

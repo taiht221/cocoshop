@@ -167,14 +167,14 @@ export default function Header() {
                 <i className="demo-icon icon-search" />
               </button>
             </div>
-            {categorytitle.loading ? <LinearProgress className={classes.loadingLine} /> : null}
+            {categorytitle.loading ? <LinearProgress className={classes.loadingLine} color="secondary" /> : null}
 
             <nav className="nav">
               <ul className="cate-top">
                 {categorytitle.categoryData
                   .map((e, i) => (
                     <li key={i}>
-                      <Link to={`/the-loai/${e.slug}`}>{e.title}</Link>
+                      <Link to={`/search/${e.slug}`}>{e.title}</Link>
                     </li>
                   ))
                   .slice(0, 3)}

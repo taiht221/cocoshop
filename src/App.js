@@ -1,28 +1,50 @@
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CartPopup from 'components/CartPopup/CartPopup';
+import ProductFeature from 'pages/Product';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import Category from './pages/CategoryGrid';
 import Checkout from './pages/Checkout';
 import Home from './pages/Home';
 import Page404 from './pages/Page404';
 import ProductDetail from './pages/ProductDetail';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#f4f8ec',
+    },
+    secondary: {
+      main: '#8bc34a',
+    },
+  },
+});
+
 function App() {
   return (
-    <div className="App">
-      <CartPopup />
-      <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route exact path="/thanh-toan" component={Checkout} />
-        <Route path="/thong-tin-san-pham/:page?" component={ProductDetail} />
-        <Route path="/the-loai/:slug?" component={Category} />
-        <Route component={Page404} />
-      </Switch>
-      <Footer />
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <div className="App">
+        <CartPopup />
+        <Header />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route exact path="/thanh-toan" component={Checkout} />
+          <Route path="/search" component={ProductFeature} />
+
+          <Route path="/:slug?" component={ProductDetail} />
+
+          <Route path="/myshop" exact>
+            <Redirect to="/" />
+          </Route>
+          <Route path="/cocoshop" exact>
+            <Redirect to="/" />
+          </Route>
+          <Route component={Page404} />
+        </Switch>
+        <Footer />
+      </div>
+    </MuiThemeProvider>
   );
 }
 

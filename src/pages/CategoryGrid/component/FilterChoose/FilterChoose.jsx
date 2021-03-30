@@ -65,7 +65,7 @@ export default function FilterChoose({ filters = {} }) {
           <li key={e.id}>
             <Chip
               lable={e.getLable(filters)}
-              color={e.isActive(filters) ? 'primary' : 'default'}
+              color={e.isActive(filters) ? 'secondary' : 'default'}
               clickable={e.isRemoveable ? null : () => {}}
               onDelete={e.isRemoveable ? () => {} : null}
             />

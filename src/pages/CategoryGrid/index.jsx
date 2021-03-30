@@ -88,11 +88,7 @@ export default function Category() {
                 <Pagination
                   paginate={Products.paginate}
                   renderLink={(e) => {
-                    if (slug === undefined) {
-                      return '/the-loai' + `?page=${e}`;
-                    } else {
-                      return `/the-loai/${slug}` + `?page=${e}`;
-                    }
+                    return `${routerMatch.url}` + `?page=${e}`;
                   }}
                 />
               </div>

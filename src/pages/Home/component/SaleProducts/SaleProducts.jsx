@@ -42,7 +42,7 @@ export default function SaleProducts(data) {
       {data?.data.map((e, i) => (
         <SwiperSlide key={i} className="fashion__card">
           <div className="image">
-            <Link to="/thong-tin-san-pham">
+            <Link to={`/${e.slug}`}>
               <img src={e.images[0].base_url} alt={e.slug} className="swiper-lazy" />
             </Link>
             {Math.round(100 - (parseInt(e.real_price) * 100) / parseInt(e.price)) > 0 ? (

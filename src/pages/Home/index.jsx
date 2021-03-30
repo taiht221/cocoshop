@@ -22,7 +22,6 @@ export default function Home() {
   if (!homeProduct) {
     return <LoadingCricle />;
   }
-
   return (
     <main className="homepage">
       <Baner />
