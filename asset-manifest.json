@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/cocoshop/static/css/main.0d4d3ada.chunk.css",
+    "main.js": "/cocoshop/static/js/main.267b14ea.chunk.js",
+    "main.js.map": "/cocoshop/static/js/main.267b14ea.chunk.js.map",
+    "runtime-main.js": "/cocoshop/static/js/runtime-main.6b88d2b7.js",
+    "runtime-main.js.map": "/cocoshop/static/js/runtime-main.6b88d2b7.js.map",
+    "static/css/2.b9e77a87.chunk.css": "/cocoshop/static/css/2.b9e77a87.chunk.css",
+    "static/js/2.b3ce14d9.chunk.js": "/cocoshop/static/js/2.b3ce14d9.chunk.js",
+    "static/js/2.b3ce14d9.chunk.js.map": "/cocoshop/static/js/2.b3ce14d9.chunk.js.map",
+    "static/js/3.38b586ee.chunk.js": "/cocoshop/static/js/3.38b586ee.chunk.js",
+    "static/js/3.38b586ee.chunk.js.map": "/cocoshop/static/js/3.38b586ee.chunk.js.map",
+    "index.html": "/cocoshop/index.html",
+    "static/css/2.b9e77a87.chunk.css.map": "/cocoshop/static/css/2.b9e77a87.chunk.css.map",
+    "static/css/main.0d4d3ada.chunk.css.map": "/cocoshop/static/css/main.0d4d3ada.chunk.css.map",
+    "static/js/2.b3ce14d9.chunk.js.LICENSE.txt": "/cocoshop/static/js/2.b3ce14d9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6b88d2b7.js",
+    "static/css/2.b9e77a87.chunk.css",
+    "static/js/2.b3ce14d9.chunk.js",
+    "static/css/main.0d4d3ada.chunk.css",
+    "static/js/main.267b14ea.chunk.js"
+  ]
+}
